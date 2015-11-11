@@ -14,5 +14,9 @@ namespace QuickBooks.Net
         String GetAuthorizationLink(IToken requestToken, String callbackUrl);
 
         IToken VerifyAccessToken(IToken requestToken, String verifier, String realmId);
+
+        void DisconnectToken(IToken accessToken);
+
+        IToken ReconnectToken(IToken accessToken);
     }
 }

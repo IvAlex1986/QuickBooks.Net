@@ -93,6 +93,7 @@
     <Compile Include="QuickBooksAdapter.cs" />
     <Compile Include="QuickBooksConnector.cs" />
     <Compile Include="QuickBooksConfigurator.cs" />
+    <Compile Include="QuickBooksException.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

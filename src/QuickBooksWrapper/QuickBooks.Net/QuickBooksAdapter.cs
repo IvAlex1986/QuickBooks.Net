@@ -1,11 +1,11 @@
-﻿using Intuit.Ipp.Core;
+﻿using DevDefined.OAuth.Framework;
+using Intuit.Ipp.Core;
 using Intuit.Ipp.Data;
 using Intuit.Ipp.DataService;
 using Intuit.Ipp.Security;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using DevDefined.OAuth.Framework;
-using System;
 
 namespace QuickBooks.Net
 {

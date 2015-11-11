@@ -1,0 +1,13 @@
+﻿@{
+    ViewBag.Title = "View";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model String
+
+<h2>
+    @Model
+</h2>
+<p>
+    @Html.ActionLink("Go To Home Page", "Index", "Home")
+</p>

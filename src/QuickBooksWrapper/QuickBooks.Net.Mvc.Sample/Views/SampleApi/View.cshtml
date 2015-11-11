@@ -1,0 +1,18 @@
+﻿@{
+    ViewBag.Title = "View";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model IEnumerable<String>
+
+<h2>
+    Sample View
+</h2>
+<div>
+    @foreach (var item in Model)
+    {
+        <p>
+            @item
+        </p>
+    }
+</div>

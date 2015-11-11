@@ -8,11 +8,11 @@ using System.Web.Mvc;
 
 namespace QuickBooks.Net.Mvc.Sample.Controllers
 {
-    public class SampleController : Controller
+    public class SampleApiController : Controller
     {
         private readonly IQuickBooksAdapter _quickBooksAdapter;
 
-        public SampleController()
+        public SampleApiController()
         {
             var accessToken = SessionHelper.GetValue<IToken>("AccessToken");
 
