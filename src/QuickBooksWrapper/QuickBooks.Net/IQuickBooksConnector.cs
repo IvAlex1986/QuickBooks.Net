@@ -17,6 +17,6 @@ namespace QuickBooks.Net
 
         void DisconnectToken(IToken accessToken);
 
-        IToken ReconnectToken(IToken accessToken, out DateTime createTokenDateTime);
+        IToken ReconnectToken(IToken accessToken, out DateTime createTokenTimeUtc);
     }
 }

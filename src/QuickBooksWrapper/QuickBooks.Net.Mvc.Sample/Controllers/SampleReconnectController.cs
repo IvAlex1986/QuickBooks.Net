@@ -20,9 +20,9 @@ namespace QuickBooks.Net.Mvc.Sample.Controllers
 
         public ActionResult DisconnectToken()
         {
-            var model = RunAction((acessToken) =>
+            var model = RunAction((acсessToken) =>
             {
-                _quickBooksConnector.DisconnectToken(acessToken);
+                _quickBooksConnector.DisconnectToken(acсessToken);
             });
 
             return View("View", (Object)model);
@@ -30,12 +30,12 @@ namespace QuickBooks.Net.Mvc.Sample.Controllers
 
         public ActionResult ReconnectToken()
         {
-            var model = RunAction((acessToken) =>
+            var model = RunAction((acсessToken) =>
             {
-                DateTime createTokenDateTime;
-                var token = _quickBooksConnector.ReconnectToken(acessToken, out createTokenDateTime);
-                SessionState.SaveValue("AcessToken", token);
-                SessionState.SaveValue("CreateAcessTokenDateTime", token);
+                DateTime createTokenTimeUtc;
+                var token = _quickBooksConnector.ReconnectToken(acсessToken, out createTokenTimeUtc);
+                SessionState.SaveValue("AccessToken", token);
+                SessionState.SaveValue("СreateTokenTimeUtc", createTokenTimeUtc);
             });
 
             return View("View", (Object)model);
