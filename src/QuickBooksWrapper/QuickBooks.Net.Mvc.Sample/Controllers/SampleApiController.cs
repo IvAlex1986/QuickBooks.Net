@@ -1,6 +1,6 @@
 ﻿using DevDefined.OAuth.Framework;
 using Intuit.Ipp.Data;
-using QuickBooks.Net.Mvc.Sample.Helpers;
+using QuickBooks.Net.Mvc.Sample.Extensions;
 using System;
 using System.Configuration;
 using System.Linq;
@@ -8,13 +8,13 @@ using System.Web.Mvc;
 
 namespace QuickBooks.Net.Mvc.Sample.Controllers
 {
-    public class SampleApiController : Controller
+    public class SampleApiController : BaseController
     {
         private readonly IQuickBooksAdapter _quickBooksAdapter;
 
         public SampleApiController()
         {
-            var accessToken = SessionHelper.GetValue<IToken>("AccessToken");
+            var accessToken = SessionState.GetValue<IToken>("AccessToken");
 
             var baseUrl = ConfigurationManager.AppSettings.Get("BaseUrl");
             var appToken = ConfigurationManager.AppSettings.Get("AppToken");

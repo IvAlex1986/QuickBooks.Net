@@ -51,7 +51,7 @@ namespace QuickBooks.Net
             ProcessConsumerRequest(accessToken, _quickBooksConfigurator.DisconnectTokenUrl);
         }
 
-        public IToken ReconnectToken(IToken accessToken)
+        public IToken ReconnectToken(IToken accessToken, out DateTime createTokenTimeUtc)
         {
             var body = ProcessConsumerRequest(accessToken, _quickBooksConfigurator.ReconnectTokenUrl);
 
@@ -62,6 +62,8 @@ namespace QuickBooks.Net
                 Realm = accessToken.Realm,
                 ConsumerKey = accessToken.ConsumerKey
             };
+
+            createTokenTimeUtc = GetElementValueFromResponse<DateTime>(body, "ServerTime").ToUniversalTime();
 
             return token;
         }

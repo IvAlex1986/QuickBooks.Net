@@ -1,12 +1,12 @@
 ﻿using DevDefined.OAuth.Framework;
-using QuickBooks.Net.Mvc.Sample.Helpers;
+using QuickBooks.Net.Mvc.Sample.Extensions;
 using System;
 using System.Configuration;
 using System.Web.Mvc;
 
 namespace QuickBooks.Net.Mvc.Sample.Controllers
 {
-    public class SampleReconnectController : Controller
+    public class SampleReconnectController : BaseController
     {
         private readonly IQuickBooksConnector _quickBooksConnector;
 
@@ -32,8 +32,10 @@ namespace QuickBooks.Net.Mvc.Sample.Controllers
         {
             var model = RunAction((acessToken) =>
             {
-                var token = _quickBooksConnector.ReconnectToken(acessToken);
-                SessionHelper.SaveValue("AcessToken", token);
+                DateTime createTokenDateTime;
+                var token = _quickBooksConnector.ReconnectToken(acessToken, out createTokenDateTime);
+                SessionState.SaveValue("AcessToken", token);
+                SessionState.SaveValue("CreateAcessTokenDateTime", token);
             });
 
             return View("View", (Object)model);
@@ -47,10 +49,10 @@ namespace QuickBooks.Net.Mvc.Sample.Controllers
 
             try
             {
-                var accessToken = SessionHelper.GetValue<IToken>("AccessToken");
+                var accessToken = SessionState.GetValue<IToken>("AccessToken");
                 action(accessToken);
 
-                result = "Token Disconnected sucessfull.";
+                result = "Token Disconnected Sucessfull.";
             }
             catch (QuickBooksException exception)
             {
