@@ -45,5 +45,20 @@ namespace QuickBooks.Net
 
             return result;
         }
+
+        public T Add<T>(T entity) where T : IEntity
+        {
+            return new DataService(Context).Add(entity);
+        }
+
+        public T Update<T>(T entity) where T : IEntity
+        {
+            return new DataService(Context).Update(entity);
+        }
+
+        public T Delete<T>(T entity) where T : IEntity
+        {
+            return new DataService(Context).Delete(entity);
+        }
     }
 }

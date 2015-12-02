@@ -55,5 +55,52 @@ namespace QuickBooks.Net.Mvc.Sample.Controllers
             var model = timeActivities.Select(n => String.Format("TimeActivity Description: {0}", n.Description)).ToList();
             return View("View", model);
         }
+
+        public ActionResult AddTimeActivity()
+        {
+            var customer = _quickBooksAdapter.FindAll<Customer>().First();
+            var vendor = _quickBooksAdapter.FindAll<Vendor>().First();
+            var item = _quickBooksAdapter.FindAll<Item>().First();
+
+            var timeActivity = new TimeActivity
+            {
+                CustomerRef = new ReferenceType
+                {
+                    Value = customer.Id,
+                    name = customer.DisplayName
+                },
+                ItemRef = new ReferenceType
+                {
+                    Value = item.Id,
+                    name = item.Name
+                },
+                AnyIntuitObject = new ReferenceType
+                {
+                    Value = vendor.Id,
+                    name = vendor.DisplayName
+                },
+                ItemElementName = ItemChoiceType5.VendorRef,
+                NameOf = TimeActivityTypeEnum.Vendor,
+                NameOfSpecified = true,
+                TxnDate = DateTime.UtcNow.Date,
+                TxnDateSpecified = true,
+                BillableStatus = BillableStatusEnum.NotBillable,
+                BillableStatusSpecified = true,
+                Taxable = false,
+                TaxableSpecified = true,
+                HourlyRate = 35.0m,
+                HourlyRateSpecified = true,
+                Hours = 8,
+                HoursSpecified = true,
+                Minutes = 0,
+                MinutesSpecified = true,
+
+                Description = String.Format("New TimeActivity entity is created from QuickBooks.Net wrapper in {0:u}", DateTime.Now)
+            };
+
+            _quickBooksAdapter.Add(timeActivity);
+
+            return FindAllTimeActivities();
+        }
     }
 }
