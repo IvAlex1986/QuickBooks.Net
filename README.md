@@ -2,11 +2,11 @@
 **QuickBooks.Net** this is .NET API wrapper for QuickBooks.
 The official documentation of using API see [here](https://www.matecat.com/api/docs).
 Also this repository can be used as C# MVC example for QuickBooks OAuth.
-Details about OAuth look [here](https://developer.intuit.com/docs/0100_accounting/0060_authentication_and_authorization/connect_from_within_your_app).
+Details about OAuth look [here](https://developer.intuit.com/docs/0050_quickbooks_api).
 
 #Example
 
-Using FindAll method:
+Example of using **FindAll** method:
 ```c#
 using DevDefined.OAuth.Framework;
 using Intuit.Ipp.Data;
@@ -43,7 +43,7 @@ namespace QuickBooks.Net.Example
 }
 ```
 
-Using Add method:
+Example of using **Add** method:
 ```c#
 public ActionResult AddTimeActivity()
 {
