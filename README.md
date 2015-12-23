@@ -1,8 +1,11 @@
 # QuickBooks.Net
-**QuickBooks.Net** this is .NET API wrapper for QuickBooks.
-The official documentation of using API see [here](https://www.matecat.com/api/docs).
+**QuickBooks.Net** is .NET API wrapper for QuickBooks.
+<br />
+The official documentation of using API is [here](https://www.matecat.com/api/docs).
+<br />
 Also this repository can be used as C# MVC example for QuickBooks OAuth.
-Details about OAuth look [here](https://developer.intuit.com/docs/0050_quickbooks_api).
+<br />
+Details about OAuth look by this [link](https://developer.intuit.com/docs/0050_quickbooks_api).
 
 #Example
 
@@ -47,11 +50,11 @@ Example of using **Add** method:
 ```c#
 public ActionResult AddTimeActivity()
 {
-    var customer = _quickBooksAdapter.FindAll<Customer>().First();
-    var vendor = _quickBooksAdapter.FindAll<Vendor>().First();
-    var item = _quickBooksAdapter.FindAll<Item>().First();
+    Customer customer = _quickBooksAdapter.FindAll<Customer>().First();
+    Vendor vendor = _quickBooksAdapter.FindAll<Vendor>().First();
+    Item item = _quickBooksAdapter.FindAll<Item>().First();
 
-    var timeActivity = new TimeActivity
+    TimeActivity timeActivity = new TimeActivity
     {
         CustomerRef = new ReferenceType
         {
@@ -89,7 +92,7 @@ public ActionResult AddTimeActivity()
 
     _quickBooksAdapter.Add(timeActivity);
 
-    return FindAllTimeActivities();
+    return View("TimeActivityView", timeActivity);
 }
 ```
 
