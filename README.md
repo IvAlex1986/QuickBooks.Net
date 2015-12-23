@@ -1,2 +1,97 @@
 # QuickBooks.Net
-QuickBooks API wrapper for .NET
+**QuickBooks.Net** this is .NET API wrapper for QuickBooks.
+The official documentation of using API see [here](https://www.matecat.com/api/docs).
+Also this repository can be used as C# MVC example for QuickBooks OAuth.
+Details about OAuth look [here](https://developer.intuit.com/docs/0100_accounting/0060_authentication_and_authorization/connect_from_within_your_app).
+
+#Example
+
+Using FindAll method:
+```c#
+using DevDefined.OAuth.Framework;
+using Intuit.Ipp.Data;
+using System;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Linq;
+using System.Web.Mvc;
+
+namespace QuickBooks.Net.Example
+{
+    public class ExampleController: Controller
+    {
+        private readonly IQuickBooksAdapter _quickBooksAdapter;
+
+        public ExampleController()
+        {
+            IToken accessToken = (IToken)System.Web.HttpContext.Current.Session["AccessToken"];
+
+            String baseUrl = ConfigurationManager.AppSettings.Get("BaseUrl");
+            String appToken = ConfigurationManager.AppSettings.Get("AppToken");
+            String consumerKey = ConfigurationManager.AppSettings.Get("ConsumerKey");
+            String consumerSecret = ConfigurationManager.AppSettings.Get("ConsumerSecret");
+
+            _quickBooksAdapter = new QuickBooksAdapter(accessToken, appToken, consumerKey, consumerSecret, baseUrl);
+        }
+
+        public ActionResult FindAllCustomers()
+        {
+            List<Customer> customers = _quickBooksAdapter.FindAll<Customer>().ToList();
+            return View("CustomersView", customers);
+        }
+    }
+}
+```
+
+Using Add method:
+```c#
+public ActionResult AddTimeActivity()
+{
+    var customer = _quickBooksAdapter.FindAll<Customer>().First();
+    var vendor = _quickBooksAdapter.FindAll<Vendor>().First();
+    var item = _quickBooksAdapter.FindAll<Item>().First();
+
+    var timeActivity = new TimeActivity
+    {
+        CustomerRef = new ReferenceType
+        {
+            Value = customer.Id,
+            name = customer.DisplayName
+        },
+        ItemRef = new ReferenceType
+        {
+            Value = item.Id,
+            name = item.Name
+        },
+        AnyIntuitObject = new ReferenceType
+        {
+            Value = vendor.Id,
+            name = vendor.DisplayName
+        },
+        ItemElementName = ItemChoiceType5.VendorRef,
+        NameOf = TimeActivityTypeEnum.Vendor,
+        NameOfSpecified = true,
+        TxnDate = DateTime.UtcNow.Date,
+        TxnDateSpecified = true,
+        BillableStatus = BillableStatusEnum.NotBillable,
+        BillableStatusSpecified = true,
+        Taxable = false,
+        TaxableSpecified = true,
+        HourlyRate = 35.0m,
+        HourlyRateSpecified = true,
+        Hours = 8,
+        HoursSpecified = true,
+        Minutes = 0,
+        MinutesSpecified = true,
+
+        Description = String.Format("New TimeActivity entity is created from QuickBooks.Net wrapper in {0:u}", DateTime.Now)
+    };
+
+    _quickBooksAdapter.Add(timeActivity);
+
+    return FindAllTimeActivities();
+}
+```
+
+#License
+This project is licensed under the [MIT license](https://github.com/IvAlex1986/QuickBooks.Net/blob/master/LICENSE).
