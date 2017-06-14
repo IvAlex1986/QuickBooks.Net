@@ -7,7 +7,7 @@ Also this repository can be used as C# MVC example for QuickBooks OAuth.
 <br />
 Details about OAuth look by this [link](https://developer.intuit.com/docs/0050_quickbooks_api).
 
-#Example
+# Example
 
 Example of using **FindAll** method:
 ```c#
@@ -96,5 +96,5 @@ public ActionResult AddTimeActivity()
 }
 ```
 
-#License
+# License
 This project is licensed under the [MIT license](https://github.com/IvAlex1986/QuickBooks.Net/blob/master/LICENSE).
